@@ -1,0 +1,50 @@
+
+function showPage(pageId) {
+
+    // Hide all pages
+    let pages = document.querySelectorAll(".page");
+
+    pages.forEach(function(page) {
+        page.classList.remove("active");
+    });
+
+    // Show selected page
+    document.getElementById(pageId).classList.add("active");
+
+    // Scroll to top
+    window.scrollTo(0, 0);
+}
+
+
+// Registration form
+document.getElementById("donorForm")
+.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    let name = document.getElementById("name").value;
+
+    let donor = {
+        name: name,
+        phone: document.getElementById("phone").value,
+        email: document.getElementById("email").value,
+        blood: document.getElementById("blood").value,
+        city: document.getElementById("city").value
+    };
+
+    // Save temporary registration details
+    sessionStorage.setItem(
+        "donor",
+        JSON.stringify(donor)
+    );
+
+    // Show success page
+    document.getElementById("welcome").innerText =
+        "Thank you, " + name + "!";
+
+    showPage("success");
+
+    // Clear form
+    this.reset();
+
+});
